@@ -18,7 +18,7 @@ import random
 def fun_1(name):
     while 1:
         i = url_queue.get(1)        #从url队列里拿取数据，进行相应处理
-        time.sleep(random.uniform(0.2,0.5))     #模拟处理操作
+        time.sleep(random.uniform(0.2,0.5))     #模拟request处理操作
         html = random.randint(1,100)
         print("生产%s的数据：%s" % (i+1,html))
         html_queue.put(html,1)      #把生产好的数据放入html队列里
@@ -29,7 +29,7 @@ def fun_1(name):
 def fun_2():
     while 1:
         data = html_queue.get(1)        #从html队列里拿取数据，进行相应处理
-        time.sleep(random.uniform(0.5,0.8))     #模拟处理操作
+        time.sleep(random.uniform(0.5,0.8))     #模拟re处理操作
         print("消费的数据：%s"%data)
         print("消费后的队列size：%s" % html_queue.qsize())
         if html_queue.qsize() ==0:      #html队列为空，说明所有生产好的html都处理完毕，消费线程关闭
