@@ -6,9 +6,9 @@ Subject：可搜索的淘宝网商品信息采集器
 Note：   基于参数q,s实现检索和翻页，每页s的值增加44.爬取的信息写入对应名字的Excel文档中.
 Software: PyCharm
 File: taobao_spider.py
-Time：2018/3/16
+Time：2018/3/21
 Author：Pychenn
-Version：V1.0
+Version：V1.1
 '''
 
 import requests
@@ -45,7 +45,7 @@ def search_fun(name,i):
 #商品信息解析函数，返回需要的商品信息
 def shangping(html):
     infos = []  #商品信息存储队列
-    fi = re.findall(r"g_page_config = ({.*}).*?g_srp_loadCss",html,re.S)
+    fi = re.findall(r"g_page_config = ({.*?});.*?g_srp_loadCss",html,re.S)  #用非贪婪匹配，解析速度比贪婪匹配快几倍
     if fi !=[]:
         #将json数据转成dic方便处理
         data = json.loads(fi[0])
