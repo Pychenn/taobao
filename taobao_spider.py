@@ -43,7 +43,7 @@ def search_fun(name,i):
         return search_fun(name,i)
 
 #商品信息解析函数，返回需要的商品信息
-def shangping(html):
+def jiexi(html):
     infos = []  #商品信息存储队列
     fi = re.findall(r"g_page_config = ({.*?});.*?g_srp_loadCss",html,re.S)  #用非贪婪匹配，解析速度比贪婪匹配快几倍
     if fi !=[]:
@@ -147,7 +147,7 @@ def main():
         for i in range(0,150):   #翻页的页数控制,一般到114页就会提示未找到相关宝贝
             while 1:
                 html = search_fun(name, i)
-                data = shangping(html)
+                data = jiexi(html)
                 if data != []:
                     storage(ws,data,i)
                     break
